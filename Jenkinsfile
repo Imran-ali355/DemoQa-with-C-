@@ -2,21 +2,27 @@ pipeline {
     agent any
 
     stages {
+        stage('Check Workspace Files') {
+            steps {
+                sh 'ls -la'
+            }
+        }
+
         stage('Restore Dependencies') {
             steps {
-                sh 'dotnet restore DemoQa.sln'
+                sh 'dotnet restore'
             }
         }
 
         stage('Build Project') {
             steps {
-                sh 'dotnet build DemoQa.sln --no-restore'
+                sh 'dotnet build --no-restore'
             }
         }
 
         stage('Run MSTest Tests') {
             steps {
-                sh 'dotnet test DemoQa.sln --no-build --verbosity normal'
+                sh 'dotnet test --no-build --verbosity normal'
             }
         }
     }
