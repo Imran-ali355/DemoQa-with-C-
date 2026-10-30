@@ -4,19 +4,19 @@ pipeline {
     stages {
         stage('Restore Dependencies') {
             steps {
-                sh 'dotnet restore'
+                sh 'dotnet restore DemoQa.sln'
             }
         }
 
         stage('Build Project') {
             steps {
-                sh 'dotnet build --no-restore'
+                sh 'dotnet build DemoQa.sln --no-restore'
             }
         }
 
         stage('Run MSTest Tests') {
             steps {
-                sh 'dotnet test --no-build --verbosity normal'
+                sh 'dotnet test DemoQa.sln --no-build --verbosity normal'
             }
         }
     }
